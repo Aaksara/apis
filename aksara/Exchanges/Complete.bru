@@ -1,0 +1,25 @@
+meta {
+  name: Complete
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{url}}/api/exchanges/{{exchangeId}}/complete/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Either party, once `accepted` and the books have changed hands. Marks the books
+  `completed` and rejects every other pending request for them.
+
+  Responses:
+  - `200`: the exchange
+  - `401`: sign in required (run **Accounts / Login**)
+}

@@ -1,0 +1,31 @@
+meta {
+  name: Logout
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/api/auth/logout/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "refresh": "{{refresh_token}}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Revokes `refresh_token`. The access token stays valid until it expires.
+
+  Responses:
+  - `204`
+  - `400`: `{"detail": "Invalid token."}`: expired, already revoked, or another user's token
+  - `401`: sign in required (run **Accounts / Login**)
+}

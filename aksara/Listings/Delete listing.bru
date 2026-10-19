@@ -1,0 +1,25 @@
+meta {
+  name: Delete listing
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{url}}/api/listings/{{listingId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Seller only. Listings with exchange history are withdrawn instead of deleted.
+
+  Responses:
+  - `204`
+  - `400`: the listing is reserved (cancel the exchange first) or completed
+  - `401`: sign in required (run **Accounts / Login**)
+}

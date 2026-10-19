@@ -1,0 +1,26 @@
+meta {
+  name: List conversations
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/conversations/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Your conversations, most recently active first. Optional `listing` filter.
+
+  Paginated: `?page=` and `?page_size=` (max 100). Response:
+  `{ "count": n, "next": url|null, "previous": url|null, "results": [...] }`
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+}

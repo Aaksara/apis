@@ -1,0 +1,16 @@
+meta {
+  name: Accounts
+  seq: 2
+}
+
+auth {
+  mode: inherit
+}
+
+docs {
+  Sign-up, email verification, sign-in, passwords and profiles.
+
+  **Login** saves `token` and `refresh_token` in the environment. Every other request
+  sends `Authorization: Bearer {{token}}` (set once on the collection). When the access
+  token expires, run **Refresh session**.
+}

@@ -1,0 +1,34 @@
+meta {
+  name: List exchanges
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/exchanges/
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~role: seller
+  ~status: pending
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Exchanges where you are the requester or the seller.
+
+  Filters: `role` (`requester` | `seller`), `status` (repeatable), `listing`.
+  `ordering`: `created_at`, `meetup_time`.
+
+  Paginated: `?page=` and `?page_size=` (max 100). Response:
+  `{ "count": n, "next": url|null, "previous": url|null, "results": [...] }`
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+}

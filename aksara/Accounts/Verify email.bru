@@ -1,0 +1,33 @@
+meta {
+  name: Verify email
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/auth/verify-email/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "uid": "{{uid}}",
+    "token": "{{email_token}}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Public. `uid` and `token` come from the link in the verification email
+  (`{FRONTEND_URL}/auth/verify-email?uid=...&token=...`). Put them in the environment as
+  `uid` and `email_token`. The link works once.
+
+  Responses:
+  - `200`: `{"detail": "Email verified. You can now log in."}`
+  - `400`: `{"detail": "Invalid or expired link."}`
+}

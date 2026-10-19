@@ -1,0 +1,23 @@
+meta {
+  name: Get exchange
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/exchanges/{{exchangeId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Responses:
+  - `200`: the exchange
+  - `401`: sign in required (run **Accounts / Login**)
+  - `404`: not yours
+}

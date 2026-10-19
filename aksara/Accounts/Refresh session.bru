@@ -1,0 +1,38 @@
+meta {
+  name: Refresh session
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/api/auth/token/refresh/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "refresh": "{{refresh_token}}"
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("token", res.body.access);
+    bru.setEnvVar("refresh_token", res.body.refresh);
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Public. Swaps `refresh_token` for new tokens and saves them. The refresh token is rotated
+  and the old one revoked. Run it when a request returns `401`.
+
+  Responses:
+  - `200`: `{"access": "...", "refresh": "..."}`
+  - `401`: the refresh token is expired or revoked: run **Login** again
+}

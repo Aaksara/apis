@@ -1,0 +1,26 @@
+meta {
+  name: Resend verification
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/auth/resend-verification/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{email}}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Public. Always `200` with the same message, whether or not the account exists.
+}

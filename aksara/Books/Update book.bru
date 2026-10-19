@@ -1,0 +1,31 @@
+meta {
+  name: Update book
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{url}}/api/books/{{bookId}}/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "edition": "3rd"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Staff only. Fixes catalogue details.
+
+  Responses:
+  - `200`: the book
+  - `401`: sign in required (run **Accounts / Login**)
+  - `403`: not staff
+}

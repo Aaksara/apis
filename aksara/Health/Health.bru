@@ -1,0 +1,20 @@
+meta {
+  name: Health
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/health/
+  body: none
+  auth: none
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Public. `200 {"status": "ok"}` when the database is reachable.
+}

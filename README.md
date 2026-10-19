@@ -1,16 +1,19 @@
-# BookX API
+# AKSARA API
 
 [Bruno](https://www.usebruno.com/) collection for the
-[BookX backend](https://github.com/Aaksara/backend): every endpoint with an example
+[AKSARA backend](https://github.com/Aaksara/backend): every endpoint with an example
 request, its rules and its responses.
 
 ## Use it
 
 1. Start the backend (`docker compose up` in the backend repo).
-2. In Bruno, choose **Open Collection**, select this folder and pick the **Local** environment.
-3. Run **Auth / Login**. Bruno keeps the session cookies, so the other requests are
-   signed in. To create an account, run **Auth / Register**, copy `uid` and `token` from
-   the link in the backend log into the environment, then run **Auth / Verify email**.
+2. In Bruno, choose **Open Collection**, select the `aksara` folder and pick the
+   **aksara** environment.
+3. Run **Accounts / Login**. It saves `token` and `refresh_token` in the environment,
+   and every other request sends `Authorization: Bearer {{token}}`.
+
+To create an account, run **Accounts / Register**, copy `uid` and the `token` from the
+link in the backend log into `uid` and `email_token`, then run **Accounts / Verify email**.
 
 Requests that create something save its id (`bookId`, `listingId`, ...) for the next
 requests. You can also set the ids in the environment.
@@ -18,13 +21,16 @@ requests. You can also set the ids in the environment.
 ## Layout
 
 ```
-Health/      liveness check
-Auth/        sign-up, email verification, sign-in, passwords, profile
-Books/       catalogue and ISBN lookup
-Listings/    listings and their images
-Exchanges/   exchange requests and meetup locations
-Chat/        conversations and messages (folder docs cover the WebSockets)
-environments/Local.bru
+aksara/
+  bruno.json
+  collection.bru          bearer auth for every request, getting-started docs
+  environments/aksara.bru url, test account, ids; token and refresh_token are secrets
+  Health/                 liveness check
+  Accounts/               sign-up, email verification, sign-in, passwords, profile
+  Books/                  catalogue and ISBN lookup
+  Listings/               listings and their images
+  Exchanges/              exchange requests and meetup locations
+  Chat/                   conversations and messages (folder docs cover the WebSockets)
 ```
 
 The docs tab of each folder and request explains the fields, rules and responses.

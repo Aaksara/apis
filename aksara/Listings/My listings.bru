@@ -1,0 +1,26 @@
+meta {
+  name: My listings
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/listings/mine/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  All of the signed-in user's listings, in every status.
+
+  Paginated: `?page=` and `?page_size=` (max 100). Response:
+  `{ "count": n, "next": url|null, "previous": url|null, "results": [...] }`
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+}

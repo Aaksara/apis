@@ -1,0 +1,30 @@
+meta {
+  name: Send message
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/api/conversations/{{conversationId}}/messages/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "body": "Hi! Is this still available?"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  `body`: 1-2000 characters (trimmed). Also pushed to both participants over WebSockets.
+
+  Responses:
+  - `201`: the message
+  - `401`: sign in required (run **Accounts / Login**)
+}

@@ -1,0 +1,42 @@
+meta {
+  name: Login
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/api/auth/login/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{email}}",
+    "password": "{{password}}"
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("token", res.body.access);
+    bru.setEnvVar("refresh_token", res.body.refresh);
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Public. Returns `access` and `refresh` JWTs and the user. Saves them in the environment
+  as `token` and `refresh_token`.
+
+  Responses:
+  - `200`: `{"access": "...", "refresh": "...", "user": {...}}`. User: `id, email, full_name, student_id, department, phone, avatar, is_email_verified, date_joined`
+  - `401`: `{"detail": "Please verify your email address before logging in.", "code": "email_not_verified"}`
+  - `401`: `{"detail": "No active account found with the given credentials"}`
+
+  Limit: 10 requests a minute per IP.
+}

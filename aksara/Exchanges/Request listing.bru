@@ -1,0 +1,42 @@
+meta {
+  name: Request listing
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/exchanges/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "listing": {{listingId}},
+    "message": "Is this still available?"
+  }
+}
+
+script:post-response {
+  if (res.status < 300) bru.setVar("exchangeId", res.body.id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Ask for someone else's available listing. Required: `listing`.
+
+  - `offered_price`: defaults to the asking price for `sell` listings; cleared for donations
+  - `offered_listing`: one of your own available listings; required for `exchange` listings
+  - `message`: optional note to the seller
+
+  One active (pending or accepted) request per listing per user.
+
+  Responses:
+  - `201`: the exchange. Exchange: `id, listing, listing_detail, requester, seller, role (requester|seller), offered_price, offered_listing, offered_listing_detail, message, status, meetup_location, meetup_location_detail, meetup_time, responded_at, completed_at, created_at, updated_at`
+  - `400`: e.g. `{"listing": ["You cannot request your own listing."]}`
+  - `401`: sign in required (run **Accounts / Login**)
+}

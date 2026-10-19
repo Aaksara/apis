@@ -1,0 +1,25 @@
+meta {
+  name: Cancel
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{url}}/api/exchanges/{{exchangeId}}/cancel/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Requester: while `pending` or `accepted`. Seller: only once `accepted` (reject a pending
+  request instead). Cancelling an accepted exchange makes the books available again.
+
+  Responses:
+  - `200`: the exchange
+  - `401`: sign in required (run **Accounts / Login**)
+}

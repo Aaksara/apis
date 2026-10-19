@@ -1,0 +1,24 @@
+meta {
+  name: Public profile
+  type: http
+  seq: 12
+}
+
+get {
+  url: {{url}}/api/auth/users/{{userId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  What other students can see about a user. Public user: `id, full_name, department, avatar, date_joined`
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+  - `404`: unknown or inactive user
+}

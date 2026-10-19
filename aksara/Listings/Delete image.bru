@@ -1,0 +1,29 @@
+meta {
+  name: Delete image
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{url}}/api/listings/{{listingId}}/images/{{imageId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Delete an uploaded image from a listing owned by the signed-in seller.
+
+  - `listingId`: the listing that owns the image.
+  - `imageId`: the image to delete, from the listing's `images` response.
+
+  Responses:
+  - `204`: deleted, with no response body
+  - `401`: sign in required (run **Accounts / Login**)
+  - `403`: the listing belongs to another seller
+  - `404`: the listing is not visible, or the image does not belong to it
+}

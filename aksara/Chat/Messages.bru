@@ -1,0 +1,26 @@
+meta {
+  name: Messages
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/conversations/{{conversationId}}/messages/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Message history, newest first.
+
+  Paginated: `?page=` and `?page_size=` (max 100). Response:
+  `{ "count": n, "next": url|null, "previous": url|null, "results": [...] }`
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+}

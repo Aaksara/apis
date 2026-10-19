@@ -1,0 +1,27 @@
+meta {
+  name: AKSARA
+}
+
+auth {
+  mode: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+docs {
+  # AKSARA API
+
+  1. Start the backend (`docker compose up`) and pick the **aksara** environment.
+  2. Run **Accounts / Login**. It saves `token` and `refresh_token`, and every other request
+     sends `Authorization: Bearer {{token}}`.
+  3. To create an account, run **Accounts / Register**, copy `uid` and the `token` from the
+     link printed in `docker compose logs web` into `uid` and `email_token`, then run
+     **Accounts / Verify email**.
+
+  Requests that create things save their `id` (e.g. `listingId`) for the next requests.
+  You can also set the ids in the environment.
+
+  Errors are `{"detail": "..."}` or `{"<field>": ["...", ...]}`.
+}

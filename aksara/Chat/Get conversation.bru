@@ -1,0 +1,23 @@
+meta {
+  name: Get conversation
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/conversations/{{conversationId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Responses:
+  - `200`: the conversation
+  - `401`: sign in required (run **Accounts / Login**)
+  - `404`: not a participant
+}

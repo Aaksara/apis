@@ -1,0 +1,35 @@
+meta {
+  name: Start conversation
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/conversations/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "listing": {{listingId}}
+  }
+}
+
+script:post-response {
+  if (res.status < 300) bru.setVar("conversationId", res.body.id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Open a chat with a listing's seller (not on your own or a withdrawn listing).
+
+  Responses:
+  - `201`: new conversation, or `200` if you already have one for this listing.
+    Conversation: `id, listing_detail {id, book, price, listing_type, status}, buyer, seller, last_message, unread_count, created_at, updated_at`
+  - `401`: sign in required (run **Accounts / Login**)
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Meetup locations
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/meetup-locations/
+  body: none
+  auth: inherit
+}
+
+script:post-response {
+  if (res.status < 300) bru.setVar("locationId", res.body[0].id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Active on-campus hand-over spots: `[{"id", "name", "description"}]` (not paginated).
+  Optional `search`.
+
+  Responses:
+  - `401`: sign in required (run **Accounts / Login**)
+}
