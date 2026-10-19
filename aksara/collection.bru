@@ -13,11 +13,12 @@ auth:bearer {
 docs {
   # AKSARA API
 
-  1. Start the backend (`docker compose up`) and pick the **aksara** environment.
+  1. Start the backend (`python manage.py runserver`) and pick the **aksara** environment.
+     For production, set `url` to the deployed API.
   2. Run **Accounts / Login**. It saves `token` and `refresh_token`, and every other request
      sends `Authorization: Bearer {{token}}`.
   3. To create an account, run **Accounts / Register**, copy `uid` and the `token` from the
-     link printed in `docker compose logs web` into `uid` and `email_token`, then run
+     link printed in the backend terminal into `uid` and `email_token`, then run
      **Accounts / Verify email**.
 
   Requests that create things save their `id` (e.g. `listingId`) for the next requests.

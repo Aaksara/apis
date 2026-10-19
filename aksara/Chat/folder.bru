@@ -15,12 +15,6 @@ docs {
 
   Message: `id, conversation, sender (user id), body, created_at, read_at`
 
-  **WebSockets** (pass the access token in the query string):
-
-  - `ws://localhost:8000/ws/chat/<conversation_id>/?token=<access>` for one conversation
-  - `ws://localhost:8000/ws/inbox/?token=<access>` for new messages from anyone (unread badges)
-
-  Client -> server: `{"type":"message","body":"..."}`, `{"type":"typing","is_typing":true}`,
-  `{"type":"read"}`. Server -> client: `message`, `typing`, `read` and `error` events.
-  Close codes: `4401` not signed in, `4403` not a participant. Limit: 30 messages a minute.
+  There are no WebSockets: the app polls **List conversations** (for `unread_count`)
+  and **Messages** (newest first) every few seconds.
 }
