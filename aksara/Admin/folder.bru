@@ -1,0 +1,14 @@
+meta {
+  name: Admin
+  seq: 7
+}
+
+auth {
+  mode: inherit
+}
+
+docs {
+  The admin console's API. Only the platform's single super admin may call it; everyone
+  else gets `403`. Create that account once with `python manage.py createsuperuser`
+  (a second one is refused), then run **Accounts / Login** with it.
+}

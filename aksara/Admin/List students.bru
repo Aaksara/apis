@@ -1,0 +1,33 @@
+meta {
+  name: List students
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/admin/students/?search=&is_email_verified=&is_active=&ordering=-date_joined&page=1
+  body: none
+  auth: inherit
+}
+
+script:post-response {
+  if (res.status === 200 && res.body.results.length) bru.setVar("studentId", res.body.results[0].id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Every student account (staff are left out), paginated. Filters: `search` (name, email,
+  student ID, department), `is_email_verified`, `is_active`. `ordering`: `date_joined`,
+  `full_name`, `last_login`, with `-` for descending.
+
+  Responses:
+  - `200`: `{"count", "next", "previous", "results": [Student]}`. Student: `id, email, full_name,
+    student_id, department, phone, is_email_verified, is_active, date_joined, last_login,
+    listing_count, active_listing_count, request_count`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

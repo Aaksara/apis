@@ -1,0 +1,32 @@
+meta {
+  name: Reorder banners
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{url}}/api/admin/banners/reorder/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "ids": [{{bannerId}}]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Sets the display order. `ids` must list every banner exactly once.
+
+  Responses:
+  - `200`: `[Banner]` in the new order
+  - `400`: `{"ids": "Send every banner id exactly once."}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Resend verification
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{url}}/api/admin/students/{{studentId}}/resend-verification/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Emails the student a new verification link.
+
+  Responses:
+  - `200`: `{"detail": "Verification email sent to ..."}`
+  - `400`: already verified
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `503`: the email could not be sent
+}

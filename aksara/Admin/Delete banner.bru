@@ -1,0 +1,25 @@
+meta {
+  name: Delete banner
+  type: http
+  seq: 13
+}
+
+delete {
+  url: {{url}}/api/admin/banners/{{bannerId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Deletes the banner and its image file.
+
+  Responses:
+  - `204`: deleted
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

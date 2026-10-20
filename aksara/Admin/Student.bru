@@ -1,0 +1,26 @@
+meta {
+  name: Student
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/admin/students/{{studentId}}/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  One student, plus their five latest listings.
+
+  Responses:
+  - `200`: Student with `recent_listings: [{id, title, course_code, condition, listing_type, price, status}]`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `404`: no such student
+}

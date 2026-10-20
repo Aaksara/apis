@@ -1,0 +1,35 @@
+meta {
+  name: Add meetup location
+  type: http
+  seq: 17
+}
+
+post {
+  url: {{url}}/api/admin/meetup-locations/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Engineering Atrium",
+    "description": "By the east stairs"
+  }
+}
+
+script:post-response {
+  if (res.status === 201) bru.setVar("locationId", res.body.id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Responses:
+  - `201`: the location
+  - `400`: field errors, e.g. a name already in use
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

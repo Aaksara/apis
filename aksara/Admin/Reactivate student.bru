@@ -1,0 +1,25 @@
+meta {
+  name: Reactivate student
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/api/admin/students/{{studentId}}/reactivate/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Lets a suspended student sign in again.
+
+  Responses:
+  - `200`: the updated student, as in **Student**
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

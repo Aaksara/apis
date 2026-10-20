@@ -1,0 +1,25 @@
+meta {
+  name: Campus settings
+  type: http
+  seq: 19
+}
+
+get {
+  url: {{url}}/api/admin/campus/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Settings from the server configuration. `email_domains` comes from `UNIVERSITY_EMAIL_DOMAINS`.
+
+  Responses:
+  - `200`: `{"email_domains": ["university.edu"]}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

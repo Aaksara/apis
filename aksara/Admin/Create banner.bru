@@ -1,0 +1,40 @@
+meta {
+  name: Create banner
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{url}}/api/admin/banners/
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  title: Spring textbook drive
+  target_url: https://akshara.app/spring
+  placement: hero
+  status: draft
+  alt_text: Students swapping books
+  image: @file()
+}
+
+script:post-response {
+  if (res.status === 201) bru.setVar("bannerId", res.body.id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Multipart. `image` is required, PNG/JPEG/WebP up to 4 MB; set the file path in the Body tab.
+  `target_url` must be `http(s)://`. New banners go last and start as drafts.
+
+  Responses:
+  - `201`: Banner
+  - `400`: field errors
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

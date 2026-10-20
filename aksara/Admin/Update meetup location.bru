@@ -1,0 +1,32 @@
+meta {
+  name: Update meetup location
+  type: http
+  seq: 18
+}
+
+patch {
+  url: {{url}}/api/admin/meetup-locations/{{locationId}}/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "is_active": false
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Rename it, change the directions, or retire it with `"is_active": false`. Locations are never
+  deleted, because past exchanges point at them.
+
+  Responses:
+  - `200`: the location
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

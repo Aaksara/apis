@@ -1,0 +1,26 @@
+meta {
+  name: Export students
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/admin/students/export/?is_email_verified=
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The students matching the same filters as **List students**, as a CSV file (no paging).
+  Cells that would run as spreadsheet formulas are prefixed with `'`.
+
+  Responses:
+  - `200`: `text/csv`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Live layout
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/cms/layouts/web/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The visible sections of a platform's home page (`web` or `mobile`), top to bottom.
+  No sign-in needed. An unknown platform returns an empty list.
+
+  Responses:
+  - `200`: `[{kind, display_title, anchor_id, variant}]`
+}

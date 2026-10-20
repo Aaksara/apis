@@ -1,0 +1,32 @@
+meta {
+  name: Update banner
+  type: http
+  seq: 11
+}
+
+patch {
+  url: {{url}}/api/admin/banners/{{bannerId}}/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status": "published"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Multipart or JSON. Send only the fields to change. A new `image` replaces and deletes the old one.
+
+  Responses:
+  - `200`: Banner
+  - `400`: field errors
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

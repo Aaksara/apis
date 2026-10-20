@@ -1,0 +1,39 @@
+meta {
+  name: Publish layout
+  type: http
+  seq: 15
+}
+
+put {
+  url: {{url}}/api/admin/layouts/web/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "base_version": 1,
+    "sections": [
+      {"kind": "header", "display_title": "Site header", "anchor_id": "site-header", "is_enabled": true, "variant": "light"},
+      {"kind": "hero", "display_title": "Buy, swap and donate textbooks on campus", "anchor_id": "hero", "is_enabled": true, "variant": "light"}
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Replaces the platform's sections, in the order sent, and publishes version `base_version + 1`.
+  `kind`: header, hero, how_it_works, listing_types, safety, call_to_action, footer.
+  `variant`: light, navy. Anchor IDs must be unique.
+
+  Responses:
+  - `200`: the new layout, as in **Layout**
+  - `400`: field errors, e.g. a repeated anchor
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `409`: another version was published after `base_version`; reload and edit again
+}

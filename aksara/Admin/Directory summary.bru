@@ -1,0 +1,25 @@
+meta {
+  name: Directory summary
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/admin/students/summary/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Totals for the directory header.
+
+  Responses:
+  - `200`: `{"students", "verified", "suspended", "joined_this_week", "active_sellers", "active_buyers"}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}
