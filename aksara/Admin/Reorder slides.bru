@@ -12,6 +12,7 @@ post {
 
 body:json {
   {
+    "slider": "home_hero",
     "ids": [{{slideId}}]
   }
 }
@@ -22,11 +23,11 @@ settings {
 }
 
 docs {
-  Sets the display order. `ids` must list every slide exactly once.
+  Sets one slider's order. `ids` must list each of its slides exactly once.
 
   Responses:
   - `200`: `[Slide]` in the new order
-  - `400`: `{"ids": "Send every slide id exactly once."}`
+  - `400`: `{"ids": "Send every slide of this slider exactly once."}`
   - `401`: sign in required (run **Accounts / Login** as the super admin)
   - `403`: not the super admin
 }

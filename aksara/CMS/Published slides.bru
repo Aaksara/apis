@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{url}}/api/cms/slides/
+  url: {{url}}/api/cms/slides/?slider=home_hero
   body: none
   auth: inherit
 }
@@ -16,8 +16,9 @@ settings {
 }
 
 docs {
-  The home page's published slides, in display order. No sign-in needed.
+  A slider's published slides, in display order. No sign-in needed. `slider`: home_hero,
+  home_safety or sign_in; leave it out for all of them.
 
   Responses:
-  - `200`: `[{id, caption, link, image, alt_text}]`
+  - `200`: `[{id, slider, caption, link, image, alt_text}]`
 }

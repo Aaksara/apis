@@ -16,10 +16,10 @@ settings {
 }
 
 docs {
-  Every home page slide, hidden ones included, in display order. Not paginated.
+  Every slide of every slider, hidden ones included, in display order. Not paginated.
 
   Responses:
-  - `200`: `[Slide]`. Slide: `{id, caption, link, image, alt_text, is_published, position, updated_at}`
+  - `200`: `[Slide]`. Slide: `{id, slider, caption, link, image, alt_text, is_published, position, updated_at}`. `slider`: home_hero, home_safety, sign_in
   - `401`: sign in required (run **Accounts / Login** as the super admin)
   - `403`: not the super admin
 }

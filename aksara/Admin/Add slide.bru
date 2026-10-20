@@ -11,6 +11,7 @@ post {
 }
 
 body:multipart-form {
+  slider: home_hero
   caption: Find the books for your course
   link: https://akshara.app/spring
   alt_text: Students swapping books
@@ -29,7 +30,8 @@ settings {
 
 docs {
   Multipart. `image` is required, PNG/JPEG/WebP up to 4 MB; set the file path in the Body tab.
-  `link` is optional and must be `http(s)://`. New slides go last.
+  `slider` defaults to home_hero. `link` is optional and must be `http(s)://`.
+New slides go last in their slider.
 
   Responses:
   - `201`: Slide
