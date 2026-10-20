@@ -1,0 +1,33 @@
+meta {
+  name: Add built-in slides
+  type: http
+  seq: 20
+}
+
+post {
+  url: {{url}}/api/admin/slides/add-defaults/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "slider": "home_safety"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Gives an empty slider the site's built-in slides, published and ready to edit.
+  `slider`: home_hero, home_safety or sign_in.
+
+  Responses:
+  - `201`: every slide, as in **List slides**
+  - `400`: `{"slider": ["This slider already has slides."]}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}
