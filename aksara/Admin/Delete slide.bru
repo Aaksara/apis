@@ -1,11 +1,11 @@
 meta {
-  name: Delete banner
+  name: Delete slide
   type: http
   seq: 13
 }
 
 delete {
-  url: {{url}}/api/admin/banners/{{bannerId}}/
+  url: {{url}}/api/admin/slides/{{slideId}}/
   body: none
   auth: inherit
 }
@@ -16,7 +16,7 @@ settings {
 }
 
 docs {
-  Deletes the banner and its image file.
+  Deletes the slide and its image file.
 
   Responses:
   - `204`: deleted

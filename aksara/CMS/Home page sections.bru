@@ -1,0 +1,23 @@
+meta {
+  name: Home page sections
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/cms/home-sections/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The kinds of the home page's visible sections, top to bottom. No sign-in needed.
+
+  Responses:
+  - `200`: e.g. `["hero", "how_it_works", "listing_types", "safety", "call_to_action"]`
+}

@@ -1,0 +1,26 @@
+meta {
+  name: Home page sections
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{url}}/api/admin/home-sections/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Every home page section, top to bottom. `kind`: hero, how_it_works, listing_types, safety,
+  call_to_action. The site header and footer are not sections; they always show.
+
+  Responses:
+  - `200`: `[{kind, is_enabled}]`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}

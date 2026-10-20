@@ -1,26 +1,25 @@
 meta {
-  name: Create banner
+  name: Add slide
   type: http
   seq: 10
 }
 
 post {
-  url: {{url}}/api/admin/banners/
+  url: {{url}}/api/admin/slides/
   body: multipartForm
   auth: inherit
 }
 
 body:multipart-form {
-  title: Spring textbook drive
-  target_url: https://akshara.app/spring
-  placement: hero
-  status: draft
+  caption: Find the books for your course
+  link: https://akshara.app/spring
   alt_text: Students swapping books
+  is_published: true
   image: @file()
 }
 
 script:post-response {
-  if (res.status === 201) bru.setVar("bannerId", res.body.id);
+  if (res.status === 201) bru.setVar("slideId", res.body.id);
 }
 
 settings {
@@ -30,10 +29,10 @@ settings {
 
 docs {
   Multipart. `image` is required, PNG/JPEG/WebP up to 4 MB; set the file path in the Body tab.
-  `target_url` must be `http(s)://`. New banners go last and start as drafts.
+  `link` is optional and must be `http(s)://`. New slides go last.
 
   Responses:
-  - `201`: Banner
+  - `201`: Slide
   - `400`: field errors
   - `401`: sign in required (run **Accounts / Login** as the super admin)
   - `403`: not the super admin

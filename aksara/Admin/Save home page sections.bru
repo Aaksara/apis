@@ -1,0 +1,38 @@
+meta {
+  name: Save home page sections
+  type: http
+  seq: 15
+}
+
+put {
+  url: {{url}}/api/admin/home-sections/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "sections": [
+      {"kind": "hero", "is_enabled": true},
+      {"kind": "how_it_works", "is_enabled": true},
+      {"kind": "listing_types", "is_enabled": true},
+      {"kind": "call_to_action", "is_enabled": true},
+      {"kind": "safety", "is_enabled": false}
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Saves the order (as sent) and which sections show. List every kind exactly once.
+
+  Responses:
+  - `200`: the sections, as in **Home page sections**
+  - `400`: `{"sections": ["Send every home page section exactly once."]}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+}
