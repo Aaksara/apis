@@ -26,8 +26,9 @@ settings {
 }
 
 docs {
-  Browse listings. Without `status`, only `available` ones are shown. Withdrawn listings are
-  only visible to their seller.
+  Browse listings. Open to visitors, who get `seller: null`: only students see who sells a
+  book. Without `status`, only `available` ones are shown. Withdrawn listings are only visible
+  to their seller.
 
   Filters: `search` (title, authors, ISBN, course code, description), `isbn`, `title`,
   `author`, `course_code`, `condition`, `listing_type`, `status` (repeat the param for
@@ -38,5 +39,5 @@ docs {
   `{ "count": n, "next": url|null, "previous": url|null, "results": [...] }`
 
   Responses:
-  - `401`: sign in required (run **Accounts / Login**)
+  - `200`: signed in or not
 }
