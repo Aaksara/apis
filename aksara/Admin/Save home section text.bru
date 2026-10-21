@@ -1,0 +1,49 @@
+meta {
+  name: Save home section text
+  type: http
+  seq: 24
+}
+
+put {
+  url: {{url}}/api/admin/home-sections/how_it_works/content/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "eyebrow": "Three steps",
+    "title": "How Akshara works",
+    "description": "Trade course books directly with other students at your university.",
+    "items": [
+      {"title": "List or find a book", "text": "Enter a book's ISBN.", "note": "Search by course code"},
+      {"title": "Agree on the details", "text": "Send the owner a request.", "note": "Built-in chat"},
+      {"title": "Meet on campus", "text": "Hand the book over.", "note": "Payment happens in person"}
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Replaces one section's text. Every field is required; the section then shows this text
+  instead of the built-in one.
+
+  Every section has `eyebrow` (60 characters; the badge on the hero), `title` (120) and
+  `description` (300). All but `call_to_action` also have exactly three `items`, each with a
+  different `title`, since each position on the page has its own icon:
+  - `hero`: `[{title}]`, the assurances under the buttons (60)
+  - `how_it_works`: `[{title, text, note}]` (60, 300, 40)
+  - `listing_types`, `safety`: `[{title, text}]` (60, 300)
+
+  Responses:
+  - `200`: the section, as in **Home page sections**
+  - `400`: a field is missing or too long, or the items are not three with different
+    titles. Errors inside items are nested: `{"items": [{}, {"text": ["..."]}, {}]}`
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `404`: no such section
+}

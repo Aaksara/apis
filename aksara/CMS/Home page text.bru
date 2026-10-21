@@ -1,0 +1,25 @@
+meta {
+  name: Home page text
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/cms/home-content/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The text the admin has written for home page sections, by kind, e.g.
+  `{"hero": {"eyebrow", "title", "description", "items": [...]}}`. Sections left out show the
+  site's built-in text. Fields are as in **Admin / Save home section text**. No sign-in needed.
+
+  Responses:
+  - `200`: `{kind: content}`, possibly `{}`
+}

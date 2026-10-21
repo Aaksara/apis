@@ -20,7 +20,8 @@ docs {
   call_to_action. The site header and footer are not sections; they always show.
 
   Responses:
-  - `200`: `[{kind, is_enabled}]`
+  - `200`: `[{kind, is_enabled, content}]`. `content` is the admin's text for the section
+    (see **Save home section text**), or `{}` while it shows the built-in text
   - `401`: sign in required (run **Accounts / Login** as the super admin)
   - `403`: not the super admin
 }
