@@ -10,9 +10,10 @@ auth {
 docs {
   A student's copy of a book, for sale, swap or donation.
 
-  Listing: `id, book {id, isbn_13 (null for books without one), title, authors, edition, cover_url}, seller (public user),
-  is_owner, condition, listing_type, price, description, course_code, preferred_location (id),
-  status, images [{id, image, uploaded_at}], created_at, updated_at, has_active_request`
+  Listing: `id, book {id, isbn_13 (null for books without one), title, authors, edition,
+  cover_url}, seller (public user), is_owner, condition, listing_type, price, description,
+  course_code, status, images [{id, image, uploaded_at}], created_at, updated_at,
+  has_active_request`
 
   - `condition`: `new` | `like_new` | `good` | `fair` | `poor`
   - `listing_type`: `sell` (price required, > 0) | `exchange` (swap) | `donate` (price cleared)

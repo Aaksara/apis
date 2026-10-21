@@ -6,15 +6,8 @@ meta {
 
 post {
   url: {{url}}/api/exchanges/{{exchangeId}}/accept/
-  body: json
+  body: none
   auth: inherit
-}
-
-body:json {
-  {
-    "meetup_location": {{locationId}},
-    "meetup_time": "2030-01-15T14:00:00Z"
-  }
 }
 
 settings {
@@ -23,12 +16,13 @@ settings {
 }
 
 docs {
-  Seller only, while `pending`. Needs an active meetup location and a future time
-  (ISO 8601). Reserves the listing, and the offered book in a swap.
+  Seller only, while `pending`. No body. Reserves the listing, and the offered book in a
+  swap. The two students then agree where and when to meet in the chat
+  (**Exchange chat**).
 
   Responses:
   - `200`: the exchange
-  - `400`: listing no longer available, or time in the past
+  - `400`: listing no longer available
   - `401`: sign in required (run **Accounts / Login**)
   - `403`: not the seller
 }

@@ -1,0 +1,32 @@
+meta {
+  name: Exchange chat
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{url}}/api/exchanges/{{exchangeId}}/conversation/
+  body: none
+  auth: inherit
+}
+
+script:post-response {
+  if (res.status < 300) bru.setVar("conversationId", res.body.id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The chat between the requester and the seller, where they agree where and when to hand
+  the book over. Either side may open it, unlike **Chat / Start conversation**, which only
+  a buyer can use. It is the same conversation as that one for this listing and buyer.
+
+  Responses:
+  - `201`: new conversation, or `200` if it already exists. See the **Chat** folder for
+    its shape.
+  - `401`: sign in required (run **Accounts / Login**)
+  - `404`: not part of this exchange
+}

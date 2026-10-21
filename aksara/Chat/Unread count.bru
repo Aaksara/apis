@@ -1,0 +1,25 @@
+meta {
+  name: Unread count
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{url}}/api/conversations/unread/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  How many messages from others you have not read, across all your conversations. For a
+  badge on the Messages link; poll it like the messages.
+
+  Responses:
+  - `200`: `{"unread": 3}`
+  - `401`: sign in required (run **Accounts / Login**)
+}
