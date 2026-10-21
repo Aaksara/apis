@@ -12,11 +12,13 @@ post {
 
 body:json {
   {
-    "book_id": {{bookId}},
+    "title": "Principles of Management",
+    "authors": "Kishor Bahadur Pradhan",
+    "edition": "3rd",
     "condition": "good",
     "listing_type": "sell",
-    "price": "25.00",
-    "course_code": "CS101",
+    "price": "450",
+    "course_code": "MGT201",
     "description": "Some highlighting."
   }
 }
@@ -31,12 +33,19 @@ settings {
 }
 
 docs {
-  Required: `book_id`, `condition`. `listing_type` defaults to `sell`, which needs a `price`.
+  Name the book in one of two ways:
+  - by its details: `title` (required), `authors`, `edition`. A catalogue book with the same
+    details, compared ignoring case and extra spaces, is reused; otherwise one is added. Most
+    local textbooks have no ISBN, so this is how the app lists books.
+  - or by `book_id`, a catalogue book, e.g. from **Books / Lookup by ISBN**.
+
+  Required: the book, `condition`. `listing_type` defaults to `sell`, which needs a `price`.
   Optional: `description`, `course_code` (stored upper-case), `preferred_location` (an active
   meetup location id).
 
   Responses:
   - `201`: the listing
-  - `400`: field errors, e.g. `{"price": ["A selling price above 0 is required. ..."]}`
+  - `400`: field errors, e.g. `{"price": ["A selling price above 0 is required. ..."]}`,
+    `{"title": ["Give the book's title."]}`, or `book_id` given together with the details
   - `401`: sign in required (run **Accounts / Login**)
 }

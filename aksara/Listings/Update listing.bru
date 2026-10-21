@@ -22,12 +22,17 @@ settings {
 }
 
 docs {
-  Seller only. The book cannot be changed. `status` can only be set to `available` or
-  `withdrawn`, and not while the listing is part of an exchange. Withdrawing rejects
-  pending requests for it and cancels requests that offer it in a swap.
+  Seller only. `title`, `authors` and `edition` correct the book's details (fields left out
+  keep their value; the listing moves to the matching catalogue book), but not while a pending
+  or accepted request involves the listing. `book_id` cannot be changed.
+
+  `status` can only be set to `available` or `withdrawn`, and not while the listing is part
+  of an exchange. Withdrawing rejects pending requests for it and cancels requests that offer
+  it in a swap.
 
   Responses:
   - `200`: the listing
-  - `400`: / `403` not the seller
+  - `400`: field errors, e.g. `{"title": ["Students have asked for this book as it is listed. ..."]}`
+  - `403`: not the seller
   - `401`: sign in required (run **Accounts / Login**)
 }

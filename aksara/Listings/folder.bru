@@ -10,11 +10,13 @@ auth {
 docs {
   A student's copy of a book, for sale, swap or donation.
 
-  Listing: `id, book {id, isbn_13, title, authors, edition, cover_url}, seller (public user),
+  Listing: `id, book {id, isbn_13 (null for books without one), title, authors, edition, cover_url}, seller (public user),
   is_owner, condition, listing_type, price, description, course_code, preferred_location (id),
-  status, images [{id, image, uploaded_at}], created_at, updated_at`
+  status, images [{id, image, uploaded_at}], created_at, updated_at, has_active_request`
 
   - `condition`: `new` | `like_new` | `good` | `fair` | `poor`
   - `listing_type`: `sell` (price required, > 0) | `exchange` (swap) | `donate` (price cleared)
   - `status`: `available` -> `reserved` -> `completed`, or `withdrawn`
+  - `has_active_request`: the signed-in student has a pending or accepted request for it.
+    Only on these endpoints; listings nested in exchanges leave it out.
 }
