@@ -1,0 +1,28 @@
+meta {
+  name: Mark email unverified
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{url}}/api/admin/students/{{studentId}}/unverify-email/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Withdraws email verification, e.g. when it was granted by mistake. Unverified students
+  cannot sign in, so this also signs the student out everywhere. They can verify again with
+  a new link (**Resend verification**).
+
+  Responses:
+  - `200`: the updated student, as in **Student**
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `404`: no such student
+}

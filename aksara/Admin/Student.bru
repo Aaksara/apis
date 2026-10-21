@@ -16,10 +16,10 @@ settings {
 }
 
 docs {
-  One student, plus their five latest listings.
+  One student, plus their five latest listings. All of them: **Student listings**.
 
   Responses:
-  - `200`: Student with `recent_listings: [{id, title, course_code, condition, listing_type, price, status}]`
+  - `200`: Student with `recent_listings`: up to five rows shaped as in **Student listings**
   - `401`: sign in required (run **Accounts / Login** as the super admin)
   - `403`: not the super admin
   - `404`: no such student

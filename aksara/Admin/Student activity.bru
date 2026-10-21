@@ -1,0 +1,33 @@
+meta {
+  name: Student activity
+  type: http
+  seq: 23
+}
+
+get {
+  url: {{url}}/api/admin/students/{{studentId}}/activity/?limit=30
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  The student's newest events, built from the marketplace's own dates: joining, listing a
+  book, exchange requests (sent, accepted, declined, cancelled, completed) on either side, and
+  conversations opened. Message contents are not included. Raise `limit` (default 30, at most
+  500) to see further back.
+
+  Responses:
+  - `200`: `{"results": [{id, kind, at, role, listing_id, book_title, counterpart}], "has_more"}`,
+    newest first. `kind`: `joined`, `listed`, `requested`, `accepted`, `rejected`,
+    `cancelled`, `completed`, `messaged`. `role` is the student's side: `buyer`, `seller`, or
+    `""` for joining. `counterpart` is the other student's name.
+  - `400`: `limit` is not a whole number from 1 to 500
+  - `401`: sign in required (run **Accounts / Login** as the super admin)
+  - `403`: not the super admin
+  - `404`: no such student
+}
