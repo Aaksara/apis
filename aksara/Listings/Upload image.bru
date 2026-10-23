@@ -24,10 +24,13 @@ settings {
 }
 
 docs {
-  Seller only. Multipart field `image`, max 4 MB, at most 5 images per listing.
+  Seller only. Multipart field `image`: a JPEG, PNG or WebP image of at most 4 MB.
+  At most 5 images per listing; they are listed in upload order, the first being the cover.
   Set the file path in the Body tab.
 
   Responses:
   - `201`: `{"id": 1, "image": "http://.../media/listings/...", "uploaded_at": "..."}`
+  - `400`: `{"image": ["Upload a JPEG, PNG or WebP image."]}`, or the listing already has 5 images
   - `401`: sign in required (run **Accounts / Login**)
+  - `403`: not the seller
 }
